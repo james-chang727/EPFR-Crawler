@@ -12,8 +12,8 @@ import pandas as pd
 now = datetime.now()
 date = now.strftime('%Y%m%d')
 
+# Change chromedriver PATH and download default_directory to desired folder path if needed
 PATH = r'C:\Users\jameschang\Desktop\chromedriver.exe'
-# Change download default_directory to desired folder path if needed
 PREFERENCES = {"download.default_directory": r"U:\EPFR Update\AutoUpdate Crawler\data"
               ,"safebrowsing.enabled": "False"}
 

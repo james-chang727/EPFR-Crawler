@@ -4,6 +4,7 @@ from datetime import datetime
 
 now = datetime.now()
 date = now.strftime('%Y%m%d')
+# Change default directory to desired folder path if needed
 PREFERENCES = {"download.default_directory": r"U:\EPFR Update\AutoUpdate Crawler\data"
               ,"safebrowsing.enabled": "False"}
 
