@@ -4,7 +4,7 @@ from datetime import datetime
 
 now = datetime.now()
 date = now.strftime('%Y%m%d')
-PREFERENCES = {"download.default_directory": "D:\Tarobo Training Materials\EPFR_crawler_project\EPFR-Crawler\data"
+PREFERENCES = {"download.default_directory": r"U:\EPFR Update\AutoUpdate Crawler\data"
               ,"safebrowsing.enabled": "False"}
 
 
