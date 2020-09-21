@@ -5,7 +5,7 @@ from datetime import datetime
 now = datetime.now()
 date = now.strftime('%Y%m%d')
 # Change default directory to desired folder path if needed
-PREFERENCES = {"download.default_directory": r"U:\EPFR Update\AutoUpdate Crawler\data"
+PREFERENCES = {"download.default_directory": r"D:\Tarobo Training Materials\EPFR_crawler_project\EPFR-Crawler\data"
               ,"safebrowsing.enabled": "False"}
 
 

@@ -11,7 +11,7 @@ from email import encoders
 
 # Check if most up to date data points on closest Wednesday, change when necessary (keep format)
 DATE = '2020-09-16'
-DIR_PATH = r"U:\EPFR Update\AutoUpdate Crawler\data"
+DIR_PATH = r"D:\Tarobo Training Materials\EPFR_crawler_project\EPFR-Crawler\data"
 
 date = datetime.now().strftime('%Y%m%d')
 
@@ -43,30 +43,31 @@ else:
 
 
 def sendEmail(EMAIL, PW, RECIPIENTS):
-    msg = MIMEMultipart()
+    msg = MIMEMultipart('related')
     msg['From'] = EMAIL
     msg['To'] = ', '.join(RECIPIENTS)
     msg['Subject'] = 'EPFR Autoupdate'
     body = 'All files checked and correct!'
     msg.attach(MIMEText(body, 'plain'))
 
-    # Attach Screenshot,, still need tweaking 
-    with open(r"U:\EPFR Update\AutoUpdate Crawler\screenshot.jpg", 'rb') as f:
-        image = MIMEImage(f.read(), 'JPEG')
-        f.close()
-    image.add_header('Content-Disposition', 'attachment', filename="screenshot.jpg")
-    msg.attach(image)
+    ## Attach Screenshot,, still need tweaking 
+    fp = open(r"screenshot.jpg", 'rb')
+    msgImage = MIMEImage(fp.read())
+    fp.close()
+    msgImage.add_header('Content-ID', '<image1>')
+    msg.attach(msgImage)
+
 
     ## Files to send and their paths
     filenames = os.listdir(DIR_PATH)
 
     for filename in filenames:
-        SourcePathName  = fr"{DIR_PATH}\{filename}"
+        SourcePathName = fr"{DIR_PATH}\{filename}"
 
-        ## Attachment of files to emailch
+        ## Attachment of files to email
         attachment = open(SourcePathName, 'rb')
         part = MIMEBase('application', "octet-stream")
-        part.set_payload((attachment).read())
+        part.set_payload(attachment.read())
         encoders.encode_base64(part)
         part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
         msg.attach(part)
@@ -84,7 +85,7 @@ def sendEmail(EMAIL, PW, RECIPIENTS):
 # Add recipients when needed
 try:
     pw = input('\nPlease type in your password.')
-    recipients = ['james.chang@dotcomintl.com']
+    recipients = ['changchiaming@outlook.com']
     sendEmail('chang880727@gmail.com', pw, recipients) 
     print('\nSuccess: email sent\n')
 except:

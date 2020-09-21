@@ -13,8 +13,8 @@ now = datetime.now()
 date = now.strftime('%Y%m%d')
 
 # Change chromedriver PATH and download default_directory to desired folder path if needed
-PATH = r'C:\Users\jameschang\Desktop\chromedriver.exe'
-PREFERENCES = {"download.default_directory": r"U:\EPFR Update\AutoUpdate Crawler\data"
+PATH = r'C:\Program Files (x86)\chromedriver.exe'
+PREFERENCES = {"download.default_directory": r"D:\Tarobo Training Materials\EPFR_crawler_project\EPFR-Crawler\data"
               ,"safebrowsing.enabled": "False"}
 
 options = webdriver.ChromeOptions()
