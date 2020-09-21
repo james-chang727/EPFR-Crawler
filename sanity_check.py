@@ -51,11 +51,11 @@ def sendEmail(EMAIL, PW, RECIPIENTS):
     msg.attach(MIMEText(body, 'plain'))
 
     # Attach Screenshot,, still need tweaking 
-    with open(r"U:\EPFR Update\AutoUpdate Crawler\screenshot.jpg", 'rb') as f:
-        image = MIMEImage(f.read(), 'JPEG')
-        f.close()
-    image.add_header('Content-Disposition', 'attachment', filename="screenshot.jpg")
-    msg.attach(image)
+    fp = open(r"screenshot.jpg", 'rb')
+    msgImage = MIMEImage(fp.read())
+    fp.close()
+    msgImage.add_header('Content-ID', '<image1>')
+    msg.attach(msgImage)
 
     ## Files to send and their paths
     filenames = os.listdir(DIR_PATH)
