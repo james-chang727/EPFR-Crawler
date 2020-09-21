@@ -7,11 +7,14 @@ import time
 from datetime import datetime
 import glob
 import os
+import pandas as pd
 
 now = datetime.now()
 date = now.strftime('%Y%m%d')
-PATH = 'C:\Program Files (x86)\chromedriver.exe'
-PREFERENCES = {"download.default_directory": "D:\Tarobo Training Materials\EPFR_crawler_project\EPFR-Crawler\data"
+
+PATH = r'C:\Users\jameschang\Desktop\chromedriver.exe'
+# Change download default_directory to desired folder path if needed
+PREFERENCES = {"download.default_directory": r"U:\EPFR Update\AutoUpdate Crawler\data"
               ,"safebrowsing.enabled": "False"}
 
 options = webdriver.ChromeOptions()
@@ -54,13 +57,13 @@ try:
         file = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, f"/ html / body / div[1] / div[2] / div[1] / div / div / div[2] / div / div / div[1] / div[2] / div[2] / ul[1] / li[{i}] / div[1] / div[1]")))
         file.click()
         excel = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, f"//*[@id='chart-table_wrapper']/div[1]/button[2]")))
+        # text = driver.find_element_by_xpath('//*[@id="chart-table"]/tbody/tr[1]/td[1]').text
         excel.click()
 
         time.sleep(50)
         driver.refresh()
-        time.sleep(5)
 
-    for j in [3, 4, 6, 7, 8]:
+    for j in [3, 4, 6, 7]:
         country_flows = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.XPATH, f"//*[@id='saved-report-folder-list']/div[2]/div[1]")))
         country_flows.click()
         file = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, f"/ html / body / div[1] / div[2] / div[1] / div / div / div[2] / div / div / div[1] / div[2] / div[2] / ul[2] / li[{j}] / div[1] / div[1]")))
@@ -68,13 +71,20 @@ try:
         excel = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, f"//*[@id='chart-table_wrapper']/div[1]/button[2]")))
         excel.click()
 
-        time.sleep(50)
+        time.sleep(30)
         driver.refresh()
-        time.sleep(5)
+
+    country_flows = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.XPATH, f"//*[@id='saved-report-folder-list']/div[2]/div[1]")))
+    country_flows.click()
+    file = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, f"/ html / body / div[1] / div[2] / div[1] / div / div / div[2] / div / div / div[1] / div[2] / div[2] / ul[2] / li[8] / div[1] / div[1]")))
+    file.click()
+    excel = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, f"//*[@id='chart-table_wrapper']/div[1]/button[2]")))
+    excel.click()
+
+    time.sleep(50)
+    driver.refresh()
 
     file_rename(fund_rename_list + country_rename_list)
 
 finally:
     driver.quit()
-
-
