@@ -1,7 +1,9 @@
 import os
 import pandas as pd
 import datetime 
-from datetime import datetime 
+from datetime import datetime
+import datetime as dt
+import calendar
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
@@ -10,7 +12,16 @@ from email.mime.image import MIMEImage
 from email import encoders
 
 # Check if most up to date data points on closest Wednesday, change when necessary (keep format)
-DATE = '2020-09-16'
+lastWed = dt.date.today() + dt.timedelta(days=2)
+delta = dt.timedelta(days=1)
+
+if lastWed.weekday() != 3:
+    while lastWed.weekday() != calendar.WEDNESDAY:
+        lastWed -= delta
+else:
+    lastWed -= dt.timedelta(days=8)
+
+DATE = str(lastWed)
 DIR_PATH = r"U:\EPFR Update\AutoUpdate Crawler\data"
 
 # Sanity Check if data dates match
