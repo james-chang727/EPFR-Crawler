@@ -83,7 +83,7 @@ def sendEmail(EMAIL, PW, RECIPIENTS):
 # Add recipients when needed
 try:
     pw = input('\nPlease type in your password.')
-    recipients = ['james.chang@dotcomintl.com']
+    recipients = ['james.chang@dotcomintl.com', 'miao.lin@dotcomintl.com', 'alan.chen@dotcomintl.com', 'itdata@ugfunds.com']
     sendEmail('chang880727@gmail.com', pw, recipients) 
     print('\nSuccess: email sent\n')
 except:
