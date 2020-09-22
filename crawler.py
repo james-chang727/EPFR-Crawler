@@ -5,12 +5,20 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from datetime import datetime
+import datetime as dt
+import calendar
 import glob
 import os
 import pandas as pd
 
-now = datetime.now()
-date = now.strftime('%Y%m%d')
+# Would normally be executed on Friday, if not please change date to Friday in YYYYmmdd format
+lastFri = dt.date.today()
+delta = dt.timedelta(days=1)
+
+while lastFri.weekday() != calendar.FRIDAY:
+    lastFri -= delta
+
+date =  lastFri.strftime('%Y%m%d')
 
 # Change chromedriver PATH and download default_directory to desired folder path if needed
 PATH = r'C:\Users\jameschang\Desktop\chromedriver.exe'

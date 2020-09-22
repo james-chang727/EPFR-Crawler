@@ -13,18 +13,6 @@ from email import encoders
 DATE = '2020-09-16'
 DIR_PATH = r"U:\EPFR Update\AutoUpdate Crawler\data"
 
-date = datetime.now().strftime('%Y%m%d')
-
-fund_rename_list = [f"{date}_EPFROutput_weekly_dataset fund flows.xlsx"
-                   ,f"{date}_EPFROutput_weekly_dataset fund flows_asset universe all_investor type all_domicile all_level 3.xlsx"
-                   ,f"{date}_EPFROutput_weekly_dataset fund flows_asset universe ETF_investor type all_domicile all_level 3.xlsx"]
-
-country_rename_list = [f"{date}_EPFROutput_weekly_dataset country flows_asset universe all_investor type active_domicile all_level 3.xlsx"
-                      ,f"{date}_EPFROutput_weekly_dataset country flows_asset universe all_investor type all_domicile all_level 3.xlsx"
-                      ,f"{date}_EPFROutput_weekly_dataset country flows_asset universe all_investor type all_domicile all_level 3_institution.xlsx"
-                      ,f"{date}_EPFROutput_weekly_dataset country flows_asset universe ETF_investor type all_domicile all_level 3.xlsx"
-                      ,f"{date}_EPFROutput_weekly_dataset country flows.xlsx"]
-
 # Sanity Check if data dates match
 len = 0
 for file in os.listdir(DIR_PATH):
@@ -41,7 +29,7 @@ else:
     print("\nPlease rerun crawler.py to get correct data!")
     quit   
 
-
+"""Function to send email out with given email address, password and recipients included in list"""
 def sendEmail(EMAIL, PW, RECIPIENTS):
     msg = MIMEMultipart()
     msg['From'] = EMAIL
@@ -63,7 +51,7 @@ def sendEmail(EMAIL, PW, RECIPIENTS):
     for filename in filenames:
         SourcePathName  = fr"{DIR_PATH}\{filename}"
 
-        ## Attachment of files to emailch
+        ## Attachment of files to email
         attachment = open(SourcePathName, 'rb')
         part = MIMEBase('application', "octet-stream")
         part.set_payload((attachment).read())
